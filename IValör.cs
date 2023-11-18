@@ -9,5 +9,8 @@ namespace Projekt_Solitaire
      interface IValör
     {
         void GetDrawn(Kort k);
+
+        bool ärRöd();
+        string getValör();
     }
 }
