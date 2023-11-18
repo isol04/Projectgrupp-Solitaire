@@ -18,6 +18,8 @@ public class Menu
 
         Console.WriteLine("5. Spelet fortsätter tills att de fyra grundhögarna är ordnade i stigande ordning och då är spelet vunnet. \n");
 
+        Console.BackgroundColor = ConsoleColor.Black;
+
         Console.WriteLine(new string('-', Console.WindowWidth));
     }
 
