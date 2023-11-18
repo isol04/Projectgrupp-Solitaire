@@ -2,6 +2,10 @@ public class Menu
 {
     public void Regler()
     {
+        Console.BackgroundColor = ConsoleColor.DarkYellow;
+        Console.ForegroundColor = ConsoleColor.Black;
+        Console.Clear();
+        
         Console.WriteLine("Hej och välkommen till spelet solitaire! Om du ej spelat solitaire tidigare står det nedan en kort förklaring av reglerna!: \n");
 
         Console.WriteLine("1. Spelet börjar med sju högar kort. Varje korthög har ett kort mer än högen till vänster. Det sista kortet i varje hög, allstå kortet längst ner är uppåtvänt. \n");
@@ -19,6 +23,9 @@ public class Menu
 
     public void StartaSpel()
     {
+        Console.BackgroundColor = ConsoleColor.DarkYellow;
+        Console.ForegroundColor = ConsoleColor.Black;
+
         Console.WriteLine();
         Console.WriteLine("Välj ett alternativ, skriv 1 för att starta ett nytt spel eller skriv 2 för att lämna.");
         Console.WriteLine("1. Starta ett nytt spel");
