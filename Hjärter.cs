@@ -6,44 +6,24 @@ using System.Threading.Tasks;
 
 namespace Projekt_Solitaire
 {
-    internal class Hjärter : IValör
+     class Hjärter : Valör
     {
-        public string getValör()
+        const ConsoleColor färg = ConsoleColor.DarkRed;
+
+        public override ConsoleColor getColor()
         {
-            return "h";
+            return färg;
         }
-        public bool ärRöd()
-        {
-            return true;
-        }
-        public void GetDrawn(Kort k)
-        {
-            try
-            {
-                if (k.facingUp)
-                {
 
 
-                    Console.ForegroundColor = ConsoleColor.DarkRed;
-                    Console.BackgroundColor = ConsoleColor.Gray;
-                    Console.Write($"♥{k.Display}");
-                    Console.BackgroundColor = ConsoleColor.DarkGreen;
-                    Console.Write(" ");
-                    Console.ForegroundColor = ConsoleColor.Black;
-                }
-                else
-                {
-                    Console.ForegroundColor = ConsoleColor.Red;
-                    Console.BackgroundColor = ConsoleColor.Gray;
-                    Console.Write("}{");
-                    Console.BackgroundColor = ConsoleColor.DarkGreen;
-                    Console.Write(" ");
-                }
-            }
-            catch
-            {
-                Console.Write("   ");
-            }
+        public override string getValör()
+        {
+            return "♥";
         }
+        public override void GetDrawn(Kort k)
+        {
+            base.GetDrawn(k);
+        }
+       
     }
 }

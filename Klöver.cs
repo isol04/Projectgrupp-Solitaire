@@ -6,41 +6,23 @@ using System.Threading.Tasks;
 
 namespace Projekt_Solitaire
 {
-    internal class Klöver : IValör
+     class Klöver : Valör
     {
-        public string getValör()
+        const ConsoleColor färg = ConsoleColor.Black;
+
+        public override ConsoleColor getColor()
         {
-            return "k";
+            return färg;
         }
-        public bool ärRöd()
+
+        public override string getValör()
         {
-            return false;
+            return "♣";
         }
-        public void GetDrawn(Kort k)
+        public override void GetDrawn(Kort k)
         {
-            try
-            {
-                if (k.facingUp)
-                {
-                    Console.ForegroundColor = ConsoleColor.Black;
-                    Console.BackgroundColor = ConsoleColor.Gray;
-                    Console.Write($"♣{k.Display}");
-                    Console.BackgroundColor = ConsoleColor.DarkGreen;
-                    Console.Write(" ");
-                }
-                else
-                {
-                    Console.ForegroundColor = ConsoleColor.Red;
-                    Console.BackgroundColor = ConsoleColor.Gray;
-                    Console.Write("}{");
-                    Console.BackgroundColor = ConsoleColor.DarkGreen;
-                    Console.Write(" ");
-                }
-            }
-            catch
-            {
-                Console.Write("   ");
-            }
+            base.GetDrawn(k);
         }
+        
     }
 }

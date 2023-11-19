@@ -6,43 +6,24 @@ using System.Threading.Tasks;
 
 namespace Projekt_Solitaire
 {
-    internal class Spader : IValör
+     class Spader : Valör
     {
-        public string getValör()
-        {
-            return "s";
-        }
-        public bool ärRöd()
-        {
-            return false;
-        }
-        public void GetDrawn(Kort k)
-        {
-            try
-            {
-                if (k.facingUp)
-                {
+        const ConsoleColor färg = ConsoleColor.Black;
 
-
-                    Console.ForegroundColor = ConsoleColor.Black;
-                    Console.BackgroundColor = ConsoleColor.Gray;
-                    Console.Write($"♠{k.Display}");
-                    Console.BackgroundColor = ConsoleColor.DarkGreen;
-                    Console.Write(" ");
-                }
-                else
-                {
-                    Console.ForegroundColor = ConsoleColor.Red;
-                    Console.BackgroundColor = ConsoleColor.Gray;
-                    Console.Write("}{");
-                    Console.BackgroundColor = ConsoleColor.DarkGreen;
-                    Console.Write(" ");
-                }
-            }
-            catch
-            {
-                Console.Write("   ");
-            }
+        public override ConsoleColor getColor()
+        {
+            return färg;
         }
+        public override string getValör()
+        {
+            return "♠";
+        }
+      
+        public override void GetDrawn(Kort k)
+        {
+            base.GetDrawn(k);
+        }
+
+       
     }
 }

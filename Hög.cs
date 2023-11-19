@@ -7,35 +7,25 @@ using System.Threading.Tasks;
 namespace Projekt_Solitaire
 {
      class Hög
-    {
-        private int nummer;
-        public List<Kort> högensKort = new List<Kort>();
+     {
+        public List<Kort> högensKort = new();
 
-        public Hög(int nummer)
+        public Hög()
         {
-            this.nummer = nummer;
         }   
 
         public Kort getÖverst()
         {
-            
-                return högensKort[högensKort.Count - 1];
-         
-        }
-        public Kort getNederst()
-        {
-            for(int i = 0; i < högensKort.Count; i++)
-            {
-                if (högensKort[i].facingUp)
-                    return högensKort[i];
-            }
             return högensKort[högensKort.Count - 1];
         }
 
-        public void flyttaTillHög(Kort k)
+        public Kort getNederst()
         {
+            for(int i = 0; i < högensKort.Count; i++)
+                if (högensKort[i].facingUp)
+                    return högensKort[i];
 
+            return högensKort[^1];
         }
-
-    }
+     }
 }

@@ -6,22 +6,39 @@ using System.Threading.Tasks;
 
 namespace Projekt_Solitaire
 {
-    internal class Kort
+     class Kort
     {
-        //public static List<IValör> valörs = new List<IValör> { new Ruter(), new Klöver(), new Spader(), new Hjärter() } ;
+        public static List<Kort> Korten = new();
+
         public int värde;
         private string display;
-        public string Display { get => display; set {  if (value == "11") display = "N"; else if (value == "12") display = "Q"; else if (value == "13") display = "K"; else if (value == "1") display = "A"; else if (value == "10") display = "X"; else display = value; }  }
-        //public  string värde { get  => Värde;  set {  }
-        public IValör valör {  get; set; }
+
+        public string Display { get => display; set { display = DisplayCharacter(value); } }
+       
+        public Valör valör  {  get; set; }
 
         public bool facingUp;
-        public Kort (int värde, IValör valör)
+        public Kort (int värde, Valör valör)
         {
             this.värde = värde;
             this.valör = valör;
             this.facingUp = false;
             this.Display = värde.ToString();
         }
+        public string DisplayCharacter(string value)
+        {
+            switch(value)
+            {
+
+                case "11": return "J";
+                case "12": return "Q";
+                case "13": return "K";
+                case "1": return "A";
+                case "10": return "X";
+                default:
+                    return value;
+            }
+        }
+
     }
 }
