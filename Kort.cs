@@ -6,39 +6,49 @@ using System.Threading.Tasks;
 
 namespace Projekt_Solitaire
 {
-     class Kort
+    class Kort
     {
         public static List<Kort> Korten = new();
 
-        public int värde;
-        private string display;
+        private int värde;
+        public int getVärde()
+        {
+        return värde;
+        }
 
-        public string Display { get => display; set { display = DisplayCharacter(value); } }
-       
-        public Valör valör  {  get; set; }
+        public ConsoleColor getColor()
+        {
+            return valör.getColor();
+        }
+        public bool facingUp()
+        {
+            return valör.facingUp;
+        }
+        public void flipDown()
+        {
+            valör.facingUp = false;
+        }
+        public void flipUp()
+        {
+            valör.facingUp = true;
+        }
+        public void getDrawn()
+        {
+            valör.GetDrawn();
+        }
+        public string getValör()
+        {
+            return valör.Display;
+        }
+        private IValör valör { get;set; }
+     
 
-        public bool facingUp;
-        public Kort (int värde, Valör valör)
+        public Kort (int värde, IValör valör)
         {
             this.värde = värde;
             this.valör = valör;
-            this.facingUp = false;
-            this.Display = värde.ToString();
+         
         }
-        public string DisplayCharacter(string value)
-        {
-            switch(value)
-            {
-
-                case "11": return "J";
-                case "12": return "Q";
-                case "13": return "K";
-                case "1": return "A";
-                case "10": return "X";
-                default:
-                    return value;
-            }
-        }
-
+     
     }
 }

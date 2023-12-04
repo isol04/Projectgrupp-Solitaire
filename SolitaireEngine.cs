@@ -17,7 +17,7 @@ namespace Projekt_Solitaire
         {
             foreach (Hög hög in Målen)
             {
-                if (hög.getÖverst().Display != "K")
+                if (hög.getÖverst().getVärde() != 13)
                 {
                     return false;
                 }
@@ -31,23 +31,10 @@ namespace Projekt_Solitaire
             for (int n = 1; n < 14; n++)
             {
 
-                for (int v = 0; v < 4; v++)
+                for (int v = 1; v <= 4; v++)
                 {
-                    switch (v)
-                    {
-                        case 0:
-                            Kort.Korten.Add(new Kort(n, new Hjärter()));
-                            break;
-                        case 1:
-                            Kort.Korten.Add(new Kort(n, new Ruter()));
-                            break;
-                        case 2:
-                            Kort.Korten.Add(new Kort(n, new Spader()));
-                            break;
-                        case 3:
-                            Kort.Korten.Add(new Kort(n, new Klöver()));
-                            break;
-                    }
+                    Kort.Korten.Add(new Kort(n, new Valör(v, n)));
+                   
                 }
             }
             
@@ -58,7 +45,7 @@ namespace Projekt_Solitaire
         {
             foreach (Hög hög in Målen)
             {
-                if ((hög.getÖverst().valör.getValör() == k.valör.getValör() && hög.getÖverst().värde == k.värde - 1))
+                if ((hög.getÖverst().getValör() == k.getValör() && hög.getÖverst().getVärde() == k.getVärde() - 1))
                 {
                     if (h.FindIndex(u => u.Equals(k)) == h.Count - 1 || h.FindIndex(u => u.Equals(k)) == 0)
                     {
@@ -79,7 +66,7 @@ namespace Projekt_Solitaire
             try
             {
                 Console.Write($"Ange till vilken hög (1-7) du vill flytta ");
-                k.valör.GetDrawn(k); 
+                k.getDrawn(); 
                 Console.WriteLine("eller skriv 'm' för att flytta kortet till dess grundhög \r\n eller skriv 'b' för att gå tillbaka");
 
                 string input = Console.ReadLine();
@@ -91,12 +78,12 @@ namespace Projekt_Solitaire
                 try
                 {
                     int place = int.Parse(input) - 1;
-                    if (Högarna[place].högensKort.Count == 0 || (k.värde + 1 == Högarna[place].getÖverst().värde && (k.valör.getValör() != Högarna[place].getÖverst().valör.getValör())))
+                    if (Högarna[place].högensKort.Count == 0 || (k.getVärde() + 1 == Högarna[place].getÖverst().getVärde() && (k.getColor() != Högarna[place].getÖverst().getColor())))
                     {
                         List<Kort> temp = new List<Kort>();
                         for (int i = h.FindIndex(u => u.Equals(k)); i < h.Count; i++)
                         {
-                            if (h[i].facingUp)
+                            if (h[i].facingUp())
                             {
                                 Högarna[place].högensKort.Add(h[i]);
                                 temp.Add(h[i]);
@@ -140,7 +127,7 @@ namespace Projekt_Solitaire
             int tempAntalUppvända = 0;
             for (int i = 0; i < h.Count; i++)
             {
-                if (h[i].facingUp) tempAntalUppvända++;
+                if (h[i].facingUp()) tempAntalUppvända++;
             }
             if (tempAntalUppvända == 1)
             {
@@ -153,9 +140,9 @@ namespace Projekt_Solitaire
             Console.Write("Uppvända kort i den valda högen: ");
             for (int n = 0; n < h.Count; n++)
             {
-                if (h[n].facingUp)
+                if (h[n].facingUp())
                 {
-                    h[n].valör.GetDrawn(h[n]);
+                    h[n].getDrawn();
                     temp.Add(h[n]);
                 }
             }
@@ -203,7 +190,8 @@ namespace Projekt_Solitaire
                 }
                 if (input == "n")
                 {
-                    Kort.Korten[0].facingUp = false;
+                  
+                    Kort.Korten[0].flipDown() ;
                     Kort.Korten.Add(Kort.Korten[0]);
                     Kort.Korten.RemoveAt(0);
                     dragInput();
@@ -226,7 +214,7 @@ namespace Projekt_Solitaire
             Console.Write("    ");
             foreach (Hög hög in Målen)
             {
-                hög.getÖverst().valör.GetDrawn(hög.getÖverst());
+                hög.getÖverst().getDrawn();
             }
             Console.WriteLine("\r\n");
             Console.WriteLine("    [ 1  2  3  4  5  6  7  ]  8  n");
@@ -240,7 +228,8 @@ namespace Projekt_Solitaire
                 }
                 try
                 {
-                    hög.getÖverst().facingUp = true;
+                  
+                    hög.getÖverst().flipUp();
                 }
                 catch
                 {
@@ -257,7 +246,7 @@ namespace Projekt_Solitaire
 
                     try
                     {
-                        Högarna[l].högensKort[i].valör.GetDrawn(Högarna[l].högensKort[i]);
+                        Högarna[l].högensKort[i].getDrawn();
                     }
                     catch
                     {
@@ -269,11 +258,11 @@ namespace Projekt_Solitaire
                 if (i == 0 && Kort.Korten.Count != 0)
                 {
                     Console.Write("  ");
-                    Kort.Korten[0].facingUp = true;
-                    Kort.Korten[0].valör.GetDrawn(Kort.Korten[0]);
+                    Kort.Korten[0].flipUp();
+                    Kort.Korten[0].getDrawn();
                     if (Kort.Korten.Count >= 2)
                     {
-                        Kort.Korten[1].valör.GetDrawn(Kort.Korten[1]);
+                        Kort.Korten[1].getDrawn();
                     }
                   
                 }
@@ -303,10 +292,10 @@ namespace Projekt_Solitaire
             {
                 Målen.Add(new Hög());
             }
-            Målen[0].högensKort.Add(new Kort(0, new Spader()));
-            Målen[1].högensKort.Add(new Kort(0, new Klöver()));
-            Målen[2].högensKort.Add(new Kort(0, new Hjärter()));
-            Målen[3].högensKort.Add(new Kort(0, new Ruter()));
+            Målen[0].högensKort.Add(new Kort(0, new Valör(1)));
+            Målen[1].högensKort.Add(new Kort(0, new Valör(2)));
+            Målen[2].högensKort.Add(new Kort(0, new Valör(3)));
+            Målen[3].högensKort.Add(new Kort(0, new Valör(4)));
 
 
 

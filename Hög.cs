@@ -22,7 +22,7 @@ namespace Projekt_Solitaire
         public Kort getNederst()
         {
             for(int i = 0; i < högensKort.Count; i++)
-                if (högensKort[i].facingUp)
+                if (högensKort[i].facingUp())
                     return högensKort[i];
 
             return högensKort[^1];
